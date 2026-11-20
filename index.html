@@ -51,12 +51,40 @@
             </div>
         </div>
 
-        <!-- Main Media Placeholder (Gameplay Trailer) -->
-        <div class="w-full max-w-5xl aspect-video bg-[#0a0a0a] border border-[#2a2a2a] rounded-sm relative group overflow-hidden flex items-center justify-center">
-            <!-- Replace this <p> with a <video> or YouTube/Vimeo <iframe> when ready -->
-            <p class="font-bebas text-3xl md:text-4xl text-[#2a2a2a] tracking-widest text-center px-4 group-hover:scale-110 transition-transform duration-700">
-                GAMEPLAY TRAILER / CO-OP DEMO
-            </p>
+        <!-- Main Gameplay Video Showcase (16:9 Split-Screen Co-Op) -->
+        <!-- Rename your video file to 'KahaPe_Gameplay.mp4' or update the src below to match -->
+        <div class="w-full max-w-5xl aspect-video bg-[#0a0a0a] border border-[#2a2a2a] hover:border-white/40 rounded-sm relative group overflow-hidden flex items-center justify-center shadow-2xl transition-colors duration-300">
+            <video
+                id="kahape-gameplay-video"
+                src="./KahaPe_Gameplay.mp4"
+                autoplay
+                loop
+                muted
+                playsinline
+                controls
+                class="w-full h-full object-cover"
+            ></video>
+
+            <!-- Label Badge -->
+            <span class="absolute top-3 left-3 bg-black/75 border border-white/15 backdrop-blur-sm px-2.5 py-0.5 rounded text-xs font-bebas tracking-widest text-gray-200 pointer-events-none">
+                GAMEPLAY &bull; SPLIT-SCREEN CO-OP
+            </span>
+
+            <!-- Quick Mute / Unmute Toggle -->
+            <button
+                id="kahape-mute-btn"
+                type="button"
+                aria-label="Unmute Kaha Pe? Gameplay audio"
+                class="absolute top-3 right-3 z-10 flex items-center gap-1.5 bg-black/75 hover:bg-white hover:text-black border border-white/25 backdrop-blur-sm px-2.5 py-1 rounded text-xs font-bebas tracking-widest text-gray-200 transition-colors cursor-pointer active:scale-95"
+            >
+                <svg id="kahape-icon-muted" class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M11 5L6 9H2v6h4l5 4V5zM23 9l-6 6M17 9l6 6"/>
+                </svg>
+                <svg id="kahape-icon-unmuted" class="hidden w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M11 5L6 9H2v6h4l5 4V5zM15.54 8.46a5 5 0 010 7.07M19.07 4.93a10 10 0 010 14.14"/>
+                </svg>
+                <span id="kahape-mute-label">MUTED</span>
+            </button>
         </div>
 
         <!-- Project Details -->
@@ -65,11 +93,11 @@
             <div class="col-span-1 flex flex-col gap-6 font-light">
                 <div>
                     <h3 class="font-bebas text-2xl tracking-widest text-gray-400 mb-2">ROLE</h3>
-                    <p class="text-sm tracking-wider text-gray-200">Game Developer, Designer & 3D Artist</p>
+                    <p class="text-sm tracking-wider text-gray-200">Procedural Map Generator &amp; 3D Building Modeler</p>
                 </div>
                 <div>
                     <h3 class="font-bebas text-2xl tracking-widest text-gray-400 mb-2">TOOLS</h3>
-                    <p class="text-sm tracking-wider text-gray-200">Unity, C#, Blender</p>
+                    <p class="text-sm tracking-wider text-gray-200">Unreal Engine (Blueprints), Blender, Substance Painter</p>
                 </div>
                 <div>
                     <h3 class="font-bebas text-2xl tracking-widest text-gray-400 mb-2">TIMELINE</h3>
@@ -81,46 +109,122 @@
             <div class="col-span-1 md:col-span-2">
                 <h3 class="font-bebas text-3xl tracking-widest text-white mb-4">THE CONCEPT</h3>
                 <p class="text-gray-300 font-light tracking-wide leading-relaxed mb-6">
-                    Kaha Pe? is a chaotic, communication-driven couch co-op game built to get friends shouting across the room. Players must coordinate their actions under pressure, navigating playful obstacles and timed objectives together on a shared screen.
+                    Kaha Pe? ("Where are you?") is an Indian-themed split-screen couch co-op game inspired by the vibrant chaos surrounding a bustling Indian train station. Dropped into separate corners of a crowded neighborhood, players must communicate landmarks, push through dense street crowds to find their friend, and race to the station before the timer runs out and the train departs.
                 </p>
                 <p class="text-gray-300 font-light tracking-wide leading-relaxed">
-                    Development focused on local multiplayer input handling, punchy game feel, and readable level design that keeps both players laughing even when plans fall apart.
+                    My focus on the project was architecting the procedural <span class="text-white font-normal">MapGenerator</span> in Unreal Engine Blueprints—dynamically generating branching street grids, road junctions, and building plots so every run feels fresh—alongside modeling the modular 3D Indian street buildings that bring the neighborhood to life.
                 </p>
             </div>
         </div>
 
-        <!-- Screenshots & Development Grid -->
+        <!-- Procedural MapGenerator & System Breakdown -->
         <div class="w-full max-w-5xl mt-20">
-            <h3 class="font-bebas text-3xl tracking-widest text-white mb-6">GAMEPLAY & BREAKDOWN</h3>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- Gameplay 01 -->
-                <div class="aspect-video bg-[#0a0a0a] border border-[#2a2a2a] rounded-sm relative group overflow-hidden flex items-center justify-center">
-                    <p class="font-bebas text-2xl text-[#2a2a2a] tracking-widest group-hover:scale-105 transition-transform duration-500">
-                        GAMEPLAY SCREENSHOT 01
+            <h3 class="font-bebas text-3xl tracking-widest text-white mb-2">PROCEDURAL MAP GENERATOR</h3>
+            <p class="text-gray-400 text-sm font-light tracking-wide mb-8">
+                Grid-based procedural road and junction generation built in Unreal Engine Blueprints, scaling from small prototype blocks to dense 25&times;25 city layouts.
+            </p>
+
+            <!-- Viewport Grid Generation Tests (MapGen1, MapGen2, MapGen3) -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+                <!-- MapGen 01 -->
+                <div class="aspect-video bg-[#0a0a0a] border border-[#2a2a2a] hover:border-white/30 rounded-sm relative group overflow-hidden flex items-center justify-center transition-colors duration-300">
+                    <img src="./MapGen1.jpg" alt="MapGenerator Early Junction Test" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');">
+                    <p class="hidden font-bebas text-2xl text-[#2a2a2a] tracking-widest">GRID TEST 01</p>
+                    <span class="absolute bottom-3 left-3 bg-black/75 border border-white/15 backdrop-blur-sm px-2.5 py-0.5 rounded text-xs font-bebas tracking-widest text-gray-200 pointer-events-none">
+                        01 &bull; JUNCTION PROTOTYPE
+                    </span>
+                </div>
+
+                <!-- MapGen 02 -->
+                <div class="aspect-video bg-[#0a0a0a] border border-[#2a2a2a] hover:border-white/30 rounded-sm relative group overflow-hidden flex items-center justify-center transition-colors duration-300">
+                    <img src="./MapGen2.jpg" alt="MapGenerator Branching Path Test" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');">
+                    <p class="hidden font-bebas text-2xl text-[#2a2a2a] tracking-widest">GRID TEST 02</p>
+                    <span class="absolute bottom-3 left-3 bg-black/75 border border-white/15 backdrop-blur-sm px-2.5 py-0.5 rounded text-xs font-bebas tracking-widest text-gray-200 pointer-events-none">
+                        02 &bull; BRANCHING PATHS
+                    </span>
+                </div>
+
+                <!-- MapGen 03 -->
+                <div class="aspect-video bg-[#0a0a0a] border border-[#2a2a2a] hover:border-white/30 rounded-sm relative group overflow-hidden flex items-center justify-center transition-colors duration-300">
+                    <img src="./MapGen3.jpg" alt="MapGenerator Full 25x25 City Grid" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');">
+                    <p class="hidden font-bebas text-2xl text-[#2a2a2a] tracking-widest">FULL 25x25 GRID</p>
+                    <span class="absolute bottom-3 left-3 bg-black/75 border border-white/15 backdrop-blur-sm px-2.5 py-0.5 rounded text-xs font-bebas tracking-widest text-gray-200 pointer-events-none">
+                        03 &bull; FULL 25&times;25 GRID
+                    </span>
+                </div>
+            </div>
+
+            <!-- Exposed Generator Parameters (MapGen4) -->
+            <div class="bg-[#0a0a0a] border border-[#2a2a2a] rounded-sm p-6 md:p-8 mb-10 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div>
+                    <span class="inline-block bg-[#151515] border border-[#2a2a2a] rounded px-2.5 py-0.5 text-xs font-bebas tracking-widest text-gray-300 mb-3">
+                        EXPOSED PARAMETERS
+                    </span>
+                    <h4 class="font-bebas text-2xl md:text-3xl tracking-widest text-white mb-3">DESIGNER-DRIVEN CONTROLS</h4>
+                    <p class="text-gray-300 text-sm font-light tracking-wide leading-relaxed">
+                        Key generation settings—<span class="text-white">Grid X / Y</span>, <span class="text-white">Tile Size</span>, <span class="text-white">Branches</span>, and <span class="text-white">Branch Iterations</span>—are exposed directly in the Unreal Editor Details panel, letting the team rapidly tune map density, street complexity, and round pacing without touching Blueprint code.
                     </p>
                 </div>
-                <!-- Gameplay 02 -->
-                <div class="aspect-video bg-[#0a0a0a] border border-[#2a2a2a] rounded-sm relative group overflow-hidden flex items-center justify-center">
-                    <p class="font-bebas text-2xl text-[#2a2a2a] tracking-widest group-hover:scale-105 transition-transform duration-500">
-                        CO-OP MECHANICS & UI
-                    </p>
+                <div class="bg-[#121212] border border-[#2a2a2a] rounded-sm overflow-hidden flex items-center justify-center p-3">
+                    <img src="./MapGen4.png" alt="MapGenerator Unreal Engine Exposed Parameters" class="w-full h-auto object-contain rounded-sm" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');">
+                    <p class="hidden py-12 font-bebas text-2xl text-[#2a2a2a] tracking-widest">GENERATOR PARAMETERS</p>
                 </div>
-                <!-- Level Design -->
-                <div class="aspect-video bg-[#0a0a0a] border border-[#2a2a2a] rounded-sm relative group overflow-hidden flex items-center justify-center">
-                    <p class="font-bebas text-2xl text-[#2a2a2a] tracking-widest group-hover:scale-105 transition-transform duration-500">
-                        LEVEL DESIGN & LAYOUT
-                    </p>
+            </div>
+
+            <!-- Algorithm Logic Flowchart (MapGen5) -->
+            <div class="bg-[#0d0d0d] border border-[#2a2a2a] rounded-sm p-4 md:p-8 relative overflow-hidden">
+                <div class="flex flex-wrap items-center justify-between gap-2 mb-6">
+                    <h4 class="font-bebas text-2xl md:text-3xl tracking-widest text-white">GENERATION LOGIC &amp; TILE SOLVER FLOWCHART</h4>
+                    <span class="bg-black/75 border border-white/15 px-2.5 py-0.5 rounded text-xs font-bebas tracking-widest text-gray-300">
+                        JUNCTIONS &rarr; ROAD EXPANSION &rarr; TILE CLASSIFICATION
+                    </span>
                 </div>
-                <!-- Characters & Assets -->
-                <div class="aspect-video bg-[#0a0a0a] border border-[#2a2a2a] rounded-sm relative group overflow-hidden flex items-center justify-center">
-                    <p class="font-bebas text-2xl text-[#2a2a2a] tracking-widest group-hover:scale-105 transition-transform duration-500">
-                        CHARACTERS & PROPS
-                    </p>
+                <div class="w-full flex items-center justify-center">
+                    <img src="./MapGen5.png" alt="MapGenerator Blueprint Logic Flowchart" class="w-full max-w-4xl h-auto object-contain rounded-sm" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');">
+                    <p class="hidden py-24 font-bebas text-2xl text-[#2a2a2a] tracking-widest">LOGIC FLOWCHART</p>
                 </div>
             </div>
         </div>
 
     </section>
+
+    <!-- Gameplay Video Audio Toggle Script -->
+    <script>
+        const kahaPeVideo = document.getElementById('kahape-gameplay-video');
+        const kahaPeMuteBtn = document.getElementById('kahape-mute-btn');
+        const kahaPeIconMuted = document.getElementById('kahape-icon-muted');
+        const kahaPeIconUnmuted = document.getElementById('kahape-icon-unmuted');
+        const kahaPeMuteLabel = document.getElementById('kahape-mute-label');
+
+        function syncKahaPeMuteUI() {
+            if (!kahaPeVideo || !kahaPeMuteBtn) return;
+            const isMuted = kahaPeVideo.muted;
+            kahaPeIconMuted.classList.toggle('hidden', !isMuted);
+            kahaPeIconUnmuted.classList.toggle('hidden', isMuted);
+            kahaPeMuteLabel.textContent = isMuted ? 'MUTED' : 'SOUND ON';
+
+            kahaPeMuteBtn.setAttribute('aria-label', `${isMuted ? 'Unmute' : 'Mute'} Kaha Pe? Gameplay audio`);
+            kahaPeMuteBtn.classList.toggle('bg-white', !isMuted);
+            kahaPeMuteBtn.classList.toggle('text-black', !isMuted);
+            kahaPeMuteBtn.classList.toggle('border-white', !isMuted);
+            kahaPeMuteBtn.classList.toggle('bg-black/75', isMuted);
+            kahaPeMuteBtn.classList.toggle('text-gray-200', isMuted);
+            kahaPeMuteBtn.classList.toggle('border-white/25', isMuted);
+        }
+
+        if (kahaPeVideo && kahaPeMuteBtn) {
+            kahaPeMuteBtn.addEventListener('click', () => {
+                kahaPeVideo.muted = !kahaPeVideo.muted;
+                if (!kahaPeVideo.muted) {
+                    kahaPeVideo.play().catch(() => {});
+                }
+                syncKahaPeMuteUI();
+            });
+
+            // Keep button synced with native player volume controls
+            kahaPeVideo.addEventListener('volumechange', syncKahaPeMuteUI);
+        }
+    </script>
 
 </body>
 </html>
